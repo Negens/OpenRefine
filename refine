@@ -157,8 +157,10 @@ check_running() {
 
     if [ "$CURL" ] ; then
         curl -s -S -f $URL > /dev/null 2>&1
-        if [ "$?" = "7" ] || [ "$?" = "22" ] ; then
+        CURL_RETURN=$?
+        if [ $CURL_RETURN -eq "7" ] || [ $CURL_RETURN -eq "22" ] ; then
             NOT_RUNNING="1"
+        fi
         fi
     elif [ "$WGET" ] ; then
         wget -O - $URL > /dev/null 2>&1
